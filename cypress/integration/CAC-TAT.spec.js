@@ -9,10 +9,11 @@ describe('Central de Atendimento ao Cliente TAT', function () {
     })
 
     it('Preenche os campos obrigatórios e envia o formulário', () => {
+        const longText = 'Oi, sou Aline e estou digitando um texto longo para realizar o testar o delay, Oi, sou Aline e estou digitando um texto longo para realizar o testar o delay,Oi, sou Aline e estou digitando um texto longo para realizar o testar o delay'
         cy.get('#firstName').type('Aline')
         cy.get('#lastName').type('França')
         cy.get('#email').type('aline@gmail.com')
-        cy.get('#open-text-area').type('Solicitação de ajuda')
+        cy.get('#open-text-area').type(longText, { delay: 0 })
         cy.get('.button[type="submit"]').click()
         cy.get('.success').should('be.visible')
 
