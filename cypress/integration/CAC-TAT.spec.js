@@ -27,4 +27,11 @@ describe('Central de Atendimento ao Cliente TAT', function () {
         cy.get('.button[type="submit"]').click()
         cy.get('.error').should('be.visible')
     })
+
+    it.only('Campo telefone continua vazio quando preenchido com valor não-numérico', () => {
+        cy.get('#phone')
+            .type('Alfanumerico')
+            .should('be.empty')
+
+    })
 })
