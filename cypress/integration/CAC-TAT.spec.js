@@ -44,7 +44,7 @@ describe('Central de Atendimento ao Cliente TAT', function () {
     })
 
     it('Exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário', () => {
-       cy.clock()
+        cy.clock()
         cy.get('#firstName').type('Aline')
         cy.get('#lastName').type('França')
         cy.get('#email').type('alinegmail.com')
@@ -84,7 +84,7 @@ describe('Central de Atendimento ao Cliente TAT', function () {
         cy.contains('button', 'Enviar').click()
         cy.get('.error').should('be.visible')
         cy.tick(THREE_SECONDS_IN_MS)
-      cy.get('.error').should('not.be.visible')
+        cy.get('.error').should('not.be.visible')
     })
 
     it('Envia o formuário com sucesso usando um comando customizado', () => {
@@ -176,5 +176,21 @@ describe('Central de Atendimento ao Cliente TAT', function () {
         cy.contains('Talking About Testing').should('be.visible')
     })
 
+    it.only('exibe e esconde as mensagens de sucesso e erro usando o .invoke', () => {
+        cy.get('.success')
+            .should('not.be.visible')
+            .invoke('show')
+            .should('be.visible')
+            .and('contain', 'Mensagem enviada com sucesso.')
+            .invoke('hide')
+            .should('not.be.visible')
+        cy.get('.error')
+            .should('not.be.visible')
+            .invoke('show')
+            .should('be.visible')
+            .and('contain', 'Valide os campos obrigatórios!')
+            .invoke('hide')
+            .should('not.be.visible')
+    })
 
 })
